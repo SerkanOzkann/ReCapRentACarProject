@@ -18,11 +18,30 @@ namespace ConsoleCarIU
             //UserManagerTest();
 
             //RentalManagerTest();
-            RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            var result = rentalManager.Add(new Rental { CarId = 1006, CustomerId = 5, RentDate = new DateTime(2020, 02, 19), ReturnDate = new DateTime(2020, 02, 20) });
-            Console.WriteLine(result.Message);
+
+            //RentalADD();
+            //UserAdd();
 
             Console.ReadLine();
+        }
+
+        private static void UserAdd()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result1 = userManager.Add(new User { UserFirstName = "Metecan", UserLastName = "Öğün", UserEmail = "Mete123@gmail.com", Password = "Samet1991" });
+            if (result1.Success)
+            {
+                Console.WriteLine(result1.Message);
+            }
+            else { Console.WriteLine(result1.Message); }
+        }
+
+        private static void RentalADD()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+
+            var result = rentalManager.Add(new Rental { CarId = 1, CustomerId = 5, RentDate = new DateTime(2020, 02, 19), ReturnDate = new DateTime(2020, 02, 20) });
+            Console.WriteLine(result.Message);
         }
 
         private static void RentalManagerTest()

@@ -26,11 +26,11 @@ namespace Business.Concrete
             if (result.Count == 0)
             {
                 _customerDal.Add(customer);
-                Console.WriteLine("Kayıt işlemi başarılı");
+                
                 return new SuccessResult(Messages.CustomerAdded);
             }
-            Console.WriteLine("Müşteri zaten kayıtlı");
-            return new ErrorResult();
+            
+            return new ErrorResult(Messages.CustomerNameInvalıd);
         }
 
         public IResult Delete(Customer customer)

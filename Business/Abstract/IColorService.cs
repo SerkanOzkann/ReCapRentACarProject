@@ -16,6 +16,6 @@ namespace Business.Abstract
         IResult Add(Color color);
         IResult Update(Color color);
         IResult Delete(Color color);
-        object Update(System.Drawing.Color color);
+      
     }
 }
