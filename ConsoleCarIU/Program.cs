@@ -1,6 +1,8 @@
 ﻿using Business.Concrete;
+using Core.Utilities.Results;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
+using Entities.Concrete;
 using System;
 
 namespace ConsoleCarIU
@@ -10,15 +12,50 @@ namespace ConsoleCarIU
         static void Main(string[] args)
         {
             //CarManagerTest();
-
-
+            //CustomerManagerTest();
             //ColorManagerTest();
+            // BrandManagerTest();
+            //UserManagerTest();
 
-            BrandManagerTest();
-
-
+            //RentalManagerTest();
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            var result = rentalManager.Add(new Rental { CarId = 1006, CustomerId = 5, RentDate = new DateTime(2020, 02, 19), ReturnDate = new DateTime(2020, 02, 20) });
+            Console.WriteLine(result.Message);
 
             Console.ReadLine();
+        }
+
+        private static void RentalManagerTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            Console.WriteLine("---------Kiralık Listesi-------");
+
+            foreach (var rental in rentalManager.GetAll().Data)
+            {
+                Console.WriteLine(rental.CustomerId);
+            }
+        }
+
+        private static void UserManagerTest()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            Console.WriteLine("-------Kullanici Listesi-----" + "\n");
+
+            foreach (var user in userManager.GetAll().Data)
+            {
+                Console.WriteLine("Adı: " + user.UserFirstName + "Soyadı: " + user.UserLastName
+                    + "Email: " + user.UserEmail + "\n");
+            }
+        }
+
+        private static void CustomerManagerTest()
+        {
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            Console.WriteLine("----Musteri Listesi-------" + "\n");
+            foreach (var customer in customerManager.GetAll().Data)
+            {
+                Console.WriteLine(customer.CompanyName + "\n");
+            }
         }
 
         private static void BrandManagerTest()
