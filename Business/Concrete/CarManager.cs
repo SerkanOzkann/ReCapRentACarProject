@@ -6,7 +6,10 @@ using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 using System.Text;
+using FluentValidation;
 
 namespace Business.Concrete
 {
@@ -22,11 +25,8 @@ namespace Business.Concrete
 
         public IResult  Add(Car car)
         {
-            if (car.Description.Length <= 2 && car.DailyPrice < 0)
-            {
-                //magic strings
-                return new ErrorResult(Messages.CarNameInvalıd);
-            }
+            
+            
                  _carDal.Add(car);
 
             return new SuccessResult(Messages.CarAdded);
