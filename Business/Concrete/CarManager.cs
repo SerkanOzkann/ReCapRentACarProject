@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
 using System.Text;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using FluentValidation;
 
 namespace Business.Concrete
@@ -23,15 +25,13 @@ namespace Business.Concrete
         }
 
 
-        public IResult  Add(Car car)
+        [ValidationAspect(typeof(CarValidator))]
+        public IResult Add(Car car)
         {
-            
-            
-                 _carDal.Add(car);
+            _carDal.Add(car);
 
             return new SuccessResult(Messages.CarAdded);
 
-            
         }
 
         public IResult Delete(Car car)

@@ -7,6 +7,8 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -19,50 +21,18 @@ namespace Business.Concrete
             _rentalDal = rentalDal;
         }
 
+        [ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
-            var rentalsReturnDate = _rentalDal.GetAll(r => r.CarId == rental.CarId);
-            var hasCustomersRentedCar = _rentalDal.GetAll(c => c.CustomerId == rental.CustomerId);
-            bool carVarMi = false;
-            bool customerVarMi = false;
-
-            if (rentalsReturnDate.Count > 0 || hasCustomersRentedCar.Count > 0)
+            var carCheck = _rentalDal.Get(c => c.CarId == rental.CarId && (c.ReturnDate == null));
+            if (carCheck != null)
             {
-                foreach (var rentalreturnDate in rentalsReturnDate)
-                {
-                    if (rentalreturnDate.ReturnDate == default)
-                    {
-                        carVarMi = true;
-                    }
-                }
-
-                foreach (var hasCustomerRentedCar in hasCustomersRentedCar)
-                {
-                    if (hasCustomerRentedCar.ReturnDate == default)
-                    {
-                        customerVarMi = true;
-                    }
-                }
-
-                if (carVarMi && customerVarMi == false)
-                {
-                    return new ErrorResult( " for car");
-                }
-
-                else if (customerVarMi && carVarMi == false)
-                {
-                    return new ErrorResult( " for customer");
-                }
-
-                else if (customerVarMi && carVarMi)
-                {
-                    return new ErrorResult(  " for customer and car");
-                }
+                return new ErrorResult(Messages.RentalAdded);
             }
             _rentalDal.Add(rental);
             return new SuccessResult(Messages.RentalAdded);
         }
-    
+
 
         public IResult Delete(Rental rental)
         {

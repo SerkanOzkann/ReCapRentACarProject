@@ -11,6 +11,9 @@ namespace Business.ValidationRules.FluentValidation
         public RentalValidator()
         {
             RuleFor(r => r.RentDate).NotEmpty();
+            RuleFor(r => r.RentDate).GreaterThanOrEqualTo(DateTime.Today).WithMessage("Rent date can't be earlier than today");
+            RuleFor(r => r.ReturnDate).NotEmpty();
+            RuleFor(r => r.ReturnDate).GreaterThanOrEqualTo(r => r.RentDate);
         }
     }
 }

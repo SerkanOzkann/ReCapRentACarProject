@@ -7,6 +7,8 @@ using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 
 namespace Business.Concrete
 {
@@ -20,17 +22,13 @@ namespace Business.Concrete
         }
 
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
-            var result = _customerDal.GetAll(c => c.UserId == customer.UserId);
-            if (result.Count == 0)
-            {
-                _customerDal.Add(customer);
-                
-                return new SuccessResult(Messages.CustomerAdded);
-            }
-            
-            return new ErrorResult(Messages.CustomerNameInvalıd);
+            _customerDal.Add(customer);
+
+            return new SuccessResult(Messages.CustomerAdded);
+
         }
 
         public IResult Delete(Customer customer)
