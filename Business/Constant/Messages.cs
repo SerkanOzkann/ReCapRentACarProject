@@ -43,7 +43,6 @@ namespace Business.Constant
         public static string RentalUpdated = "Rental güncellendi.";
         public static string RentalNameInvalıd = "Rentalismi geçersiz";
 
-
-
+        public static string CarImageLimitExceeded = "CarImageLimitExceeded";
     }
 }
