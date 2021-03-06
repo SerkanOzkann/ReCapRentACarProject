@@ -4,6 +4,7 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
+using Core.Entities.Concrete;
 
 namespace ConsoleCarIU
 {
@@ -25,16 +26,16 @@ namespace ConsoleCarIU
             Console.ReadLine();
         }
 
-        private static void UserAdd()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
-            var result1 = userManager.Add(new User { UserFirstName = "Metecan", UserLastName = "Öğün", UserEmail = "Mete123@gmail.com", Password = "Samet1991" });
-            if (result1.Success)
-            {
-                Console.WriteLine(result1.Message);
-            }
-            else { Console.WriteLine(result1.Message); }
-        }
+        //private static void UserAdd()
+        //{
+        //    UserManager userManager = new UserManager(new EfUserDal());
+        //    var result1 = userManager.Add(new User { UserFirstName = "Metecan", UserLastName = "Öğün", UserEmail = "Mete123@gmail.com", Password = "Samet1991" });
+        //    if (result1.Success)
+        //    {
+        //        Console.WriteLine(result1.Message);
+        //    }
+        //    else { Console.WriteLine(result1.Message); }
+        //}
 
         private static void RentalADD()
         {
@@ -55,17 +56,17 @@ namespace ConsoleCarIU
             }
         }
 
-        private static void UserManagerTest()
-        {
-            UserManager userManager = new UserManager(new EfUserDal());
-            Console.WriteLine("-------Kullanici Listesi-----" + "\n");
+        //private static void UserManagerTest()
+        //{
+        //    UserManager userManager = new UserManager(new EfUserDal());
+        //    Console.WriteLine("-------Kullanici Listesi-----" + "\n");
 
-            foreach (var user in userManager.GetAll().Data)
-            {
-                Console.WriteLine("Adı: " + user.UserFirstName + "Soyadı: " + user.UserLastName
-                    + "Email: " + user.UserEmail + "\n");
-            }
-        }
+        //    foreach (var user in userManager.GetAll().Data)
+        //    {
+        //        Console.WriteLine("Adı: " + user.UserFirstName + "Soyadı: " + user.UserLastName
+        //            + "Email: " + user.UserEmail + "\n");
+        //    }
+        //}
 
         private static void CustomerManagerTest()
         {

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using Core.Entities.Concrete;
 using Entities.Concrete;
 using FluentValidation;
 
@@ -11,13 +12,12 @@ namespace Business.ValidationRules.FluentValidation
     {
         public UserValidator()
         {
-            RuleFor(u => u.UserFirstName).MinimumLength(3);
-            RuleFor(u => u.UserLastName).MinimumLength(3);
-            RuleFor(u => u.UserEmail).EmailAddress();
-            RuleFor(u => u.Password).NotEmpty();
+            RuleFor(u => u.FirstName).MinimumLength(3);
+            RuleFor(u => u.LastName).MinimumLength(3);
+            RuleFor(u => u.Email).EmailAddress();
+            
 
-            RuleFor(u => u.Password).MinimumLength(8)
-                .WithMessage("Şifreniz en az 8 karekter içermelidir.");
+           
 
           
 
