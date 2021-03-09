@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using Core.Extencions;
+using Core.Extensions;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Core.Utilities.Security.JWT

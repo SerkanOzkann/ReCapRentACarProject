@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Business.Constant;
 using Castle.DynamicProxy;
-using Core.Extencions;
+using Core.Extensions;
 using Core.Utilities.Interceptors;
 using Core.Utilities.IoC;
 using Microsoft.AspNetCore.Http;

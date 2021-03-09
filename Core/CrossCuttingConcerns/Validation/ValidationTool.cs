@@ -6,7 +6,7 @@ using System.Text;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using ValidationException = FluentValidation.ValidationException;
 
-namespace Core.CrossCottingConcerns.Validation
+namespace Core.CrossCuttingConcern.Validation
 {
   public static  class ValidationTool
     {

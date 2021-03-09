@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Castle.DynamicProxy;
-using Core.CrossCottingConcerns.Validation;
+using Core.CrossCuttingConcern.Validation;
+
 using Core.Utilities.Interceptors;
 using FluentValidation;
 

@@ -7,6 +7,8 @@ using Autofac;
 using Business.Abstract;
 using Business.Concrete;
 using Business.DependencyResolvers.Autofac;
+using Core.DependencyResolvers;
+using Core.Extensions;
 using Core.Utilities.IoC;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
@@ -49,7 +51,7 @@ namespace WebAPI
 
             };
 
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("thisismy"));
@@ -70,7 +72,10 @@ namespace WebAPI
 
                         };
                 });
-            ServiceTool.Create(services);
+            services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule()
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -10,7 +10,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
 using System.Text;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Validation;
+using Core.Aspects.Performance;
 using FluentValidation;
 
 namespace Business.Concrete
@@ -26,6 +28,9 @@ namespace Business.Concrete
 
 
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
+       
+
         public IResult Add(Car car)
         {
             _carDal.Add(car);
